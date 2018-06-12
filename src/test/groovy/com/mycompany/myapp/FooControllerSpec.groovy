@@ -24,7 +24,7 @@ class FooControllerSpec extends Specification implements ControllerUnitTest<FooC
         when: "the controller action is called"
         controller.doSomething()
 
-        then: "the Mock can be used to validate cardinality"
+        then: "the Mock can be used to validate cardinality and parameters"
         1 * fooService.doSomething("Sally") // must be in then block
 
         and: "the mocked service returns the default 'zero value' of 'null'"
