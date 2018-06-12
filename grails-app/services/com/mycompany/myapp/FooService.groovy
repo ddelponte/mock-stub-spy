@@ -5,7 +5,7 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class FooService {
 
-    String doSomething() {
-        return "FooService did something"
+    String doSomething(String name) {
+        return "Hi ${name}, FooService did something"
     }
 }

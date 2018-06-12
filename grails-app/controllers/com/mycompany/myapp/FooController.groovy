@@ -4,6 +4,6 @@ class FooController {
     FooService fooService
 
     def doSomething() {
-        render fooService.doSomething().toString()
+        render fooService.doSomething("Sally").toString()
     }
 }

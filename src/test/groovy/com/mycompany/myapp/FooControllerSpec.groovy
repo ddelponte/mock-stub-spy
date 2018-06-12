@@ -25,7 +25,7 @@ class FooControllerSpec extends Specification implements ControllerUnitTest<FooC
         controller.doSomething()
 
         then: "the Mock can be used to validate cardinality"
-        1 * fooService.doSomething() // must be in then block
+        1 * fooService.doSomething("Sally") // must be in then block
 
         and: "the mocked service returns the default 'zero value' of 'null'"
         response.text == null.toString()
@@ -34,7 +34,7 @@ class FooControllerSpec extends Specification implements ControllerUnitTest<FooC
     void "Stub FooService"() {
         given: "the collaborating service is stubbed"
         FooService fooService = Stub(FooService) {
-            doSomething() >> "Stub did something"
+            doSomething("Sally") >> "Stub did something"
         }
 
         and: "the stubbed service is set on the controller"
@@ -59,9 +59,9 @@ class FooControllerSpec extends Specification implements ControllerUnitTest<FooC
         controller.doSomething()
 
         then: "the Spy can be used to validate cardinality"
-        1 * fooService.doSomething() // can be in then or given block
+        1 * fooService.doSomething("Sally") // can be in then or given block
 
         and: "the text from the original service implementation is returned"
-        response.text == "FooService did something"
+        response.text == "Hi Sally, FooService did something"
     }
 }
