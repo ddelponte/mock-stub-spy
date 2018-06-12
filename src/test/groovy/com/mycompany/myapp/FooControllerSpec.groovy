@@ -6,58 +6,62 @@ import spock.lang.Specification
 
 class FooControllerSpec extends Specification implements ControllerUnitTest<FooController>, DataTest {
 
-    def setup() {
-    }
-
-    def cleanup() {
-    }
-
     void "exception is thrown if collaborating service is not mocked"() {
-        when:
+        when: "the controller action is called without mocking the collaborating service"
         controller.doSomething()
 
-        then:
+        then: "a NullPointerException is thrown"
         thrown NullPointerException
     }
 
     void "Mock FooService"() {
-        given:
+        given: "the collaborating service is mocked"
         FooService fooService = Mock(FooService)
+
+        and: "the mocked service is set on the controller"
         controller.fooService = fooService
 
-        when:
+        when: "the controller action is called"
         controller.doSomething()
 
-        then:
+        then: "the Mock can be used to validate cardinality"
         1 * fooService.doSomething() // must be in then block
+
+        and: "the mocked service returns the default 'zero value' of 'null'"
         response.text == null.toString()
     }
 
     void "Stub FooService"() {
-        given:
+        given: "the collaborating service is stubbed"
         FooService fooService = Stub(FooService) {
             doSomething() >> "Stub did something"
         }
+
+        and: "the stubbed service is set on the controller"
         controller.fooService = fooService
 
-        when:
+        when: "the controller action is called"
         controller.doSomething()
 
-        then:
+        then: "the stubbed service returns the stubbed text"
         // 1 * fooService.doSomething() cardinality not supported by Stub
         response.text == "Stub did something"
     }
 
     void "Spy FooService"() { // requires implementation of DataTest trait to avoid GORM errors
-        given:
+        given: "the collaborating service is a Spy"
         FooService fooService = Spy(FooService)
+
+        and: "the Spy service is set on the controller"
         controller.fooService = fooService
 
-        when:
+        when: "the controller action is called"
         controller.doSomething()
 
-        then:
+        then: "the Spy can be used to validate cardinality"
         1 * fooService.doSomething() // can be in then or given block
+
+        and: "the text from the original service implementation is returned"
         response.text == "FooService did something"
     }
 }
