@@ -6,6 +6,6 @@ import groovy.transform.CompileStatic
 class FooService {
 
     String doSomething(String name) {
-        return "Hi ${name}, FooService did something"
+        "Hi ${name}, FooService did something"
     }
 }
