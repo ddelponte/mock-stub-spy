@@ -5,7 +5,7 @@ import spock.lang.Specification
 
 class SpySpec  extends Specification implements ControllerUnitTest<FooController> {
 
-    void "Spy FooService"() { // requires implementation of DataTest trait to avoid GORM errors
+    void "Spy FooService"() {
         given: "the collaborating service is a Spy"
         def fooService = Spy(FooService)
 
