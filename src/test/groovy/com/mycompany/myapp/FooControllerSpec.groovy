@@ -13,23 +13,6 @@ class FooControllerSpec extends Specification implements ControllerUnitTest<FooC
         thrown NullPointerException
     }
 
-    void "Stub FooService"() {
-        given: "the collaborating service is stubbed"
-        FooService fooService = Stub(FooService) {
-            doSomething("Sally") >> "Stub did something"
-        }
-
-        and: "the stubbed service is set on the controller"
-        controller.fooService = fooService
-
-        when: "the controller action is called"
-        controller.doSomething()
-
-        then: "the stubbed service returns the stubbed text"
-        // 1 * fooService.doSomething() cardinality not supported by Stub
-        response.text == "Stub did something"
-    }
-
     void "Spy FooService"() { // requires implementation of DataTest trait to avoid GORM errors
         given: "the collaborating service is a Spy"
         FooService fooService = Spy(FooService)
