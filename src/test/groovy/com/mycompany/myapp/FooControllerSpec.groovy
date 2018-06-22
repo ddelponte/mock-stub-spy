@@ -13,23 +13,6 @@ class FooControllerSpec extends Specification implements ControllerUnitTest<FooC
         thrown NullPointerException
     }
 
-    void "Mock FooService"() {
-        given: "the collaborating service is mocked"
-        FooService fooService = Mock(FooService)
-
-        and: "the mocked service is set on the controller"
-        controller.fooService = fooService
-
-        when: "the controller action is called"
-        controller.doSomething()
-
-        then: "the Mock can be used to validate cardinality and parameters"
-        1 * fooService.doSomething("Sally") // must be in then block
-
-        and: "the mocked service returns the default 'zero value' of 'null'"
-        response.text == null.toString()
-    }
-
     void "Stub FooService"() {
         given: "the collaborating service is stubbed"
         FooService fooService = Stub(FooService) {
