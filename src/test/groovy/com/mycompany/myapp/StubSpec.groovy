@@ -7,7 +7,7 @@ class StubSpec extends Specification implements ControllerUnitTest<FooController
 
     void "Stub FooService"() {
         given: "the collaborating service is stubbed"
-        FooService fooService = Stub(FooService) {
+        def fooService = Stub(FooService) {
             doSomething(_) >> "Stub did something"
         }
 
