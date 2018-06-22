@@ -1,5 +1,8 @@
 package com.mycompany.myapp
 
+import groovy.transform.CompileStatic
+
+@CompileStatic
 class FooController {
     FooService fooService
 
