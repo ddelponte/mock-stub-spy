@@ -1,9 +1,7 @@
 package com.mycompany.myapp
 
-import grails.gorm.transactions.Transactional
 import groovy.transform.CompileStatic
 
-@Transactional
 @CompileStatic
 class FooService {
 
